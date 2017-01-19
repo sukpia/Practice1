@@ -1,5 +1,12 @@
-﻿// 1/19/2017 - What is the virtual keyword??
+﻿// 1/19/2017
+// What is the virtual keyword??
 // reference link : https://msdn.microsoft.com/en-us/library/9fkccyh4.aspx
+// What is sealed modifier?
+// reference link : https://msdn.microsoft.com/en-us/library/88c54tsw.aspx
+// What is override modifier?
+// reference link : https://msdn.microsoft.com/en-us/library/ebca9ah3.aspx
+// What is abstract modifier?
+// reference link : https://msdn.microsoft.com/en-us/library/sf985hc5.aspx
 
 using System;
 using System.Collections.Generic;
@@ -130,6 +137,50 @@ namespace Practice2
                     name = "Unknown";
                 }
             }
+        }
+    }
+
+    sealed class SealedClass
+    {
+        public int x;
+        public int y;
+    }
+
+    // you may try to inherit form the sealed class by using the following statement:
+    // class MyDerivedClass : SealedClass {} // Error
+
+    class SealedTest2
+    {
+        static void Main()
+        {
+            SealedClass sc = new SealedClass();
+            sc.x = 110;
+            sc.y = 150;
+            Console.WriteLine("x = {0}, y = {1}", sc.x, sc.y);
+        }
+    }
+    // Output: x = 110, y = 150
+
+    // The abstract class is intended only to be a base class of other classes.
+    // It indicates that thing being modified has a missing or incomplete implementation
+    // Members marked as abstract, must be implemented by classes that derive from the abstract class
+    abstract class ShapeClass
+    {
+        abstract public int Area();
+    }
+
+    class Square : ShapeClass
+    {
+        int side = 0;
+        
+        public Square(int n)
+        {
+            side = n;
+        }
+        // Area method is required to avoid a compile-time error
+        public override int Area()
+        {
+            return side * side;
         }
     }
 }
